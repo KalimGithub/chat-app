@@ -1,7 +1,7 @@
 import React from "react";
 import useConversation from "../stateManage/useConversation.js";
 import { useSocketContext } from "../context/SocketContext.jsx";
-import sound from "../assets/notification.mp3";
+// import sound from "../assets/notification.mp3";
 function Chat({ user }) {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const isSelected = selectedConversation?._id === user._id;
