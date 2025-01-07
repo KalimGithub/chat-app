@@ -5,6 +5,7 @@ require("dotenv").config();
 const clc = require("cli-color");
 const userRoutes = require("./routes/userRoute");
 const messageRoutes = require("./routes/messageRoute");
+const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { app, server } = require("./SocketIO/index.js");
@@ -28,6 +29,15 @@ app.use(cookieParser());
 // user routes
 app.use("/api/user", userRoutes);
 app.use("/api/message", messageRoutes);
+
+// code for deployment
+if (process.env.NODE_ENV === "production") {
+  const dirPath = path.resolve();
+  app.use(express.static("./frontend/dist"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(dirPath, "./frontend/dist", "index.html"));
+  });
+}
 
 // mongodb connection and express app listener
 mongoose

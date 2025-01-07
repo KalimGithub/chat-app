@@ -15,11 +15,11 @@ const io = new Server(server, {
 const users = {};
 
 io.on("connection", (socket) => {
-  console.log("new client connected", socket.id);
+  //console.log("new client connected", socket.id);
   const userId = socket.handshake.query.userId;
   if (userId) {
     users[userId] = socket.id;
-    console.log("userssss", users);
+    // console.log("userssss", users);
   }
   io.emit("getOnline", Object.keys(users));
 
